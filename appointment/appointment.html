@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appointment Booking</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #212121;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
+      }
+
+      .logo {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+
+      .logo img {
+        height: 140px;
+        width: 400px;
+      }
+
+      .form-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      form {
+        background-color: rgb(67, 66, 66);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #fafafa;
+      }
+
+      label {
+        color: rgb(251, 252, 252);
+        font-family: serif;
+        font-size: 20px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      button {
+        background-color: rgb(255, 215, 15);
+        color: black;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: rgb(240, 202, 9);
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo">
+      <a href="../index.html"><img src="log.png" alt="Logo" /></a>
+    </div>
+    <div class="form-div">
+      <form id="appointmentForm">
+        <h1>Book an Appointment</h1>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" required />
+
+        <label for="time">Select Time:</label>
+        <select id="time" name="time" required>
+          <option value="" disabled selected>Select a time</option>
+          <option value="09:00 AM">09:00 AM</option>
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="11:00 AM">11:00 AM</option>
+          <option value="12:00 PM">12:00 PM</option>
+          <option value="01:00 PM">01:00 PM</option>
+          <option value="02:00 PM">02:00 PM</option>
+          <option value="03:00 PM">03:00 PM</option>
+          <option value="04:00 PM">04:00 PM</option>
+          <option value="05:00 PM">05:00 PM</option>
+          <option value="06:00 PM">06:00 PM</option>
+          <option value="07:00 PM">07:00 PM</option>
+          <option value="08:00 PM">08:00 PM</option>
+        </select>
+
+        <button type="button" id="book-appointment" disabled>
+          Book Appointment
+        </button>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      const form = document.getElementById("appointmentForm");
+      const button = document.getElementById("book-appointment");
+      const inputs = form.querySelectorAll("input, select");
+
+      inputs.forEach((input) => {
+        input.addEventListener("input", () => {
+          button.disabled = !form.checkValidity();
+        });
+      });
+
+      button.addEventListener("click", function () {
+        Swal.fire({
+          title: "Appointment is booked",
+          icon: "success",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "../index.html";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
